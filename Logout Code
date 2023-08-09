@@ -1,0 +1,9 @@
+#SCRIPT LOGOUT PPPoE Profiles
+:local bot "6305356998:AAG1-xm0kfqKiUdllnHtKFdgCn6vlSJeK8w";
+:local chat "-959324536";
+:local lastdisc [/ppp secret get [find name=$user] last-disconnect-reason];
+:local lastlogout [/ppp secret get [find name=$user] last-logged-out];
+:local lastcall [/ppp secret get [find name=$user] last-caller-id];
+:local active [/ppp active print count];
+:local datetime "Tanggal: $[/system clock get date] %0AJam: $[/system clock get time]";
+/tool fetch url="https://api.telegram.org/bot$bot/sendmessage\?chat_id=$chat&text=\E2\9D\8CPPPOE-LOGOUT %0A$datetime%0AUSER: $user%0ALast Disconnect Reason: $lastdisc %0ALast Logout: $lastlogout %0ALast Caller ID: $lastcall %0ATotal active: $active Client" keep-result=no;
