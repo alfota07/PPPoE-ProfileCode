@@ -1,0 +1,14 @@
+#SCRIPT LOGIN PPPoE Profiles
+:local nama "$user";
+:local bot "6305356998:AAG1-xm0kfqKiUdllnHtKFdgCn6vlSJeK8w";
+:local chat "-959324536";
+:local ips [/ppp active get [find name=$nama] address];
+:local up [/ppp active get [find name=$nama] uptime];
+:local caller [/ppp active get [find name=$nama] caller-id];
+:local service [/ppp active get [find name=$nama] service];
+:local active [/ppp active print count];
+:local datetime "Tanggal: $[/system clock get date] %0AJam: $[/system clock get time]";
+:local lastdisc [/ppp secret get [find name=$user] last-disconnect-reason];
+:local lastlogout [/ppp secret get [find name=$user] last-logged-out];
+:local lastcall [/ppp secret get [find name=$user] last-caller-id];
+/tool fetch url="https://api.telegram.org/bot$bot/sendMessage?chat_id=$chat &text=\E2\9C\85 PPPOE LOGIN%0A$datetime%0AUser: $user%0AIP Client: $ips%0ACaller ID: $caller%0AUptime: $up%0ATotal Active: $active Client%0AService: $service%0ALast Disconnect Reason: $lastdisc %0ALast Logout: $lastlogout %0ALast Caller ID: $lastcall" mode=http keep-result=no;
